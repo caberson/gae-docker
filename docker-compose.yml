@@ -1,0 +1,20 @@
+version: '2'
+services:
+  app:
+    build: ./
+    image: gae
+    # container-name: gae-container
+    dns: 8.8.8.8
+    ports:
+     - "8080:8080"
+    network_mode: "bridge"
+    volumes:
+      - ./helloworld:/app
+    command: [
+        "/usr/local/src/google_appengine/dev_appserver.py",
+        "--skip_sdk_update_check=yes",
+        "--host=0.0.0.0",
+        "--port=8080",
+        "--admin_port=8000",
+        "/app"
+    ]
